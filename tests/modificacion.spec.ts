@@ -24,3 +24,4 @@ describe('tests PrimeNumber class', () => {
     expect(aux).to.eql([3, 5, 7]);
   });
 });
+  
