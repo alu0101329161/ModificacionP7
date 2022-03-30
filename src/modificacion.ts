@@ -1,103 +1,86 @@
 /**
- * @class clas PrimeNumber para numeros primos
+ * Clase RandomNumber siguiendo patron
+ * Singleton Permite obtener numeros 
+ * aleatorios
  */
-export class PrimeNumber implements Iterable<number> {
+export class RandomNumber {
+  private static randomNumber: RandomNumber;
   /**
-   * Instancia de la clase PrimeNumber para respetar el patrón
-   * de diseño Singelton
+   * Constructor de la clase privado vacio ya que 
+   * esta clase solo genera numeros aleatorios
    */
-  private static primeNumber: PrimeNumber;
-  /**
-   * Almacen de numeros primos.
-   */
-  private primos100: Map<string, number>;
-
-  /**
-   * Constructor de la clase privado
-   */
-  private constructor() {
-    this.primos100 = new Map<string, number>();
-    this.addPrimo(1);
-    this.addPrimo(3);
-    this.addPrimo(5);
-    this.addPrimo(7);
-  }
-
-  /**
-   * Método que añade numneros primos en nuestro alamcen.
-   * @param numero numero a añadir
-   * @returns true si el numero se añadió
-   */
-  addPrimo(numero: number) : boolean {
-    if (this.esPrimo(numero)) {
-      this.primos100.set(`${numero}`, numero);
-      return true;
-    }
-    return false;
-  }
-
+  private constructor() {}
   /**
    * Método que sigue el patrón Singelton
    * @returns Una instancia de la clase
    */
-  public static getPrimeNumber(): PrimeNumber {
-    if (!PrimeNumber.primeNumber) {
-      PrimeNumber.primeNumber = new PrimeNumber();
+  public static getRandomNumber(): RandomNumber {
+    if (!RandomNumber.randomNumber) {
+      RandomNumber.randomNumber = new RandomNumber();
     }
-    return PrimeNumber.primeNumber;
+    return RandomNumber.randomNumber;
   }
-
   /**
-   * Método que mira si un número es primo
-   * @param numero numero a analizar
-   * @returns Verdadedro si el numero es primo
+   * Funcion ran01
+   * @returns Un número aleatorio en punto flotante generado en el rango [0, 1].
    */
-  private esPrimo(numero: number): boolean {
-    for (let i = 2, raiz = Math.sqrt(numero); i <= raiz; i++) {
-      if (numero % i === 0) {
-        return false;
-      } 
-    }
-    return numero > 1;
+   public ran01(){
+      return Math.random()
   }
-
   /**
-   * Método que devuelve numeros primos
-   * @param n tope de número primos
-   * @returns numeros primos
+   * Funcion ranNM
+   * @returns Un número aleatorio en punto flotante generado en el rango [n, m], donde n y m son parámetros del método correspondiente.
    */
-  getPrimoN(n: number): number[] {
-    const aux: number[] = [];
-    for (let x = 0; x <= n; x++) {
-      if (this.esPrimo(x)) {
-        aux.push(x);
-      }
-    }
-    return aux;
+   public ranNM(n :number, m :number){
+      return Math.random() * (m-n) + n;
   }
-
   /**
-   * Método que devuelve numeros primos
-   * @param n tope inferior
-   * @param m tope superior
-   * @returns numeros primos
+   * Funcion intRanNM
+   * @returns Un número aleatorio entero generado en el rango [n, m], donde n y m son parámetros del método correspondiente.
    */
-  getPrimoNM(n: number, m: number): number[] {
-    const aux: number[] = [];
-    for (let x = n; x <= m; x++) {
-      if (this.esPrimo(x)) {
-        aux.push(x);
-      }
-    }
-    return aux;
-  }
-
-  /**
-   * Método que hace la clase Iterable
-   * @returns El valor de los valores del MAP
-   */
-  [Symbol.iterator](): Iterator<number> {
-    return this.primos100.values();
+   public intRanNM(n :number, m :number){
+      return Math.floor(Math.random() * (m-n)) + n;
   }
 }
 
+/**
+ * Clase iterable que devuelve una coleccion e
+ * implementa una interfaz iterable de RandomNumber
+ */
+export class RandomNumberSetCollection implements Iterable<RandomNumber> {
+
+  private numeros: Set<RandomNumber>;
+
+  /**
+   * Constructor
+   * @param numeros conjunto de numeros aleatorios
+   */
+  constructor(numeros: RandomNumber[]) {
+    this.numeros = new Set(numeros);
+  }
+  /**
+   * Funcion addNumero.
+   * Añade un numero al conjunto
+   * @param numero numero a añadir
+   */
+  addNumero(numero :RandomNumber) {
+      this.numeros.add(numero);
+  }
+  
+  /**
+   * Funcion getCantidadDeElementos.
+   * @returns tamaño del conjunto
+   */
+  getCantidadDeElementos() {
+      return this.numeros.size;
+  }
+  
+  /**
+   * Iterador.
+   * Recorre el conjunto
+   * @returns valores del conjunto
+   */
+  [Symbol.iterator](): Iterator<RandomNumber> {
+      return this.numeros.values();
+  }
+}
