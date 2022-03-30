@@ -1,27 +1,51 @@
 import 'mocha';
 import {expect} from "chai";
-import {PrimeNumber} from "../src/modificacion";
+import {RandomNumber,RandomNumberSetCollection, RandomNumberSetCollectionNumber} from "../src/modificacion";
 
-const primos = PrimeNumber.getPrimeNumber();
+const random1 = RandomNumber.getRandomNumber()
+const random2 = RandomNumber.getRandomNumber()
+const random3 = RandomNumber.getRandomNumber()
 
-describe('tests PrimeNumber class', () => {
-  it('test addPrimo', () => {
-    expect(primos.addPrimo(5)).to.eql(true);
-    expect(primos.addPrimo(6)).to.eql(false);
+var collectionrandom = new RandomNumberSetCollection([random1,random2,random2]);
+
+describe('tests RandomNumber class', () => {
+  it('test Number entre 0 y 1', () => {
+    expect(random1.ran01()).not.to.be.equal(null);
   });
-  it('test getPrimeNumber', () => {
-    expect(PrimeNumber.getPrimeNumber()).to.eql(primos);
+  it('test Number entre 2 rangos N y M', () => {
+    expect(random2.ranNM(2,2)).eql(2);
   });
-  it('test getPrimoN', () => {
-    expect(primos.getPrimoN(10)).to.eql([2, 3, 5, 7]);
-  });
-  it('test getPrimoNM', () => {
-    expect(primos.getPrimoNM(10, 20)).to.eql([11, 13, 17, 19]);
-  });
-  it('test Iterable', () => {
-    let aux: number[] = [];
-    [...primos].forEach((primo) => aux.push(primo));
-    expect(aux).to.eql([3, 5, 7]);
+  it('test Number entre dos rangos en flotante', () => {
+    expect(random3.intRanNM(2,2)).eql(2);
   });
 });
-  
+
+describe('tests RandomNumberSetCollection class', () => {
+  it('Existe una instancia de la clase', () => {
+    expect(collectionrandom).not.to.be.equal(null);
+  });
+  it('Devuelve el numero de elementos', () => {
+    expect(collectionrandom.getCantidadDeElementos()).eql(1);
+  });
+  it('Test iterable en la collecion', () => {
+    let aux: number[] = [];
+    [...collectionrandom].forEach((random) => aux.push(random.ran01()));
+    expect(aux).to.eql(aux);
+  });
+});
+
+var collectionrandomnumber = new RandomNumberSetCollectionNumber([2,3,4]);
+
+describe('tests RandomNumberSetCollection class', () => {
+  it('Existe una instancia de la clase', () => {
+    expect(collectionrandomnumber).not.to.be.equal(null);
+  });
+  it('Devuelve el numero de elementos', () => {
+    expect(collectionrandomnumber.getCantidadDeElementos()).eql(3);
+  });
+  it('Test iterable en la collecion', () => {
+    let aux: number[] = [];
+    [...collectionrandomnumber].forEach((random) => aux.push(random));
+    expect(aux).to.eql([2,3,4]);
+  });
+});

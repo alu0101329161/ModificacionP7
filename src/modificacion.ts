@@ -84,3 +84,45 @@ export class RandomNumberSetCollection implements Iterable<RandomNumber> {
       return this.numeros.values();
   }
 }
+
+/**
+ * Clase iterable que devuelve una coleccion e
+ * implementa una interfaz iterable de RandomNumber
+ */
+export class RandomNumberSetCollectionNumber implements Iterable<number> {
+
+  private numeros: Set<number>;
+
+  /**
+   * Constructor
+   * @param numeros conjunto de numeros aleatorios
+   */
+  constructor(numeros: number[]) {
+    this.numeros = new Set(numeros);
+  }
+  /**
+   * Funcion addNumero.
+   * Añade un numero al conjunto
+   * @param numero numero a añadir
+   */
+  addNumero(numero :number) {
+      this.numeros.add(numero);
+  }
+  
+  /**
+   * Funcion getCantidadDeElementos.
+   * @returns tamaño del conjunto
+   */
+  getCantidadDeElementos() {
+      return this.numeros.size;
+  }
+  
+  /**
+   * Iterador.
+   * Recorre el conjunto
+   * @returns valores del conjunto
+   */
+  [Symbol.iterator](): Iterator<number> {
+      return this.numeros.values();
+  }
+}
