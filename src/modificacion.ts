@@ -56,14 +56,6 @@ export class RandomNumberSetCollectionNumber implements Iterable<number> {
   constructor(numeros: number[]) {
     this.numeros = new Set(numeros);
   }
-  /**
-   * Funcion addNumero.
-   * Añade un numero al conjunto
-   * @param numero numero a añadir
-   */
-  addNumero(numero :number) {
-      this.numeros.add(numero);
-  }
   
   /**
    * Funcion getCantidadDeElementos.
