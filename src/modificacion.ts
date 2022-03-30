@@ -45,54 +45,10 @@ export class RandomNumber {
 
 /**
  * Clase iterable que devuelve una coleccion e
- * implementa una interfaz iterable de RandomNumber
- */
-export class RandomNumberSetCollection implements Iterable<RandomNumber> {
-
-  private numeros: Set<RandomNumber>;
-
-  /**
-   * Constructor
-   * @param numeros conjunto de numeros aleatorios
-   */
-  constructor(numeros: RandomNumber[]) {
-    this.numeros = new Set(numeros);
-  }
-  /**
-   * Funcion addNumero.
-   * Añade un numero al conjunto
-   * @param numero numero a añadir
-   */
-  addNumero(numero :RandomNumber) {
-      this.numeros.add(numero);
-  }
-  
-  /**
-   * Funcion getCantidadDeElementos.
-   * @returns tamaño del conjunto
-   */
-  getCantidadDeElementos() {
-      return this.numeros.size;
-  }
-  
-  /**
-   * Iterador.
-   * Recorre el conjunto
-   * @returns valores del conjunto
-   */
-  [Symbol.iterator](): Iterator<RandomNumber> {
-      return this.numeros.values();
-  }
-}
-
-/**
- * Clase iterable que devuelve una coleccion e
- * implementa una interfaz iterable de RandomNumber
+ * implementa una interfaz iterable de tipo number
  */
 export class RandomNumberSetCollectionNumber implements Iterable<number> {
-
   private numeros: Set<number>;
-
   /**
    * Constructor
    * @param numeros conjunto de numeros aleatorios
@@ -123,6 +79,50 @@ export class RandomNumberSetCollectionNumber implements Iterable<number> {
    * @returns valores del conjunto
    */
   [Symbol.iterator](): Iterator<number> {
+      return this.numeros.values();
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Clase iterable que devuelve una coleccion e
+ * implementa una interfaz iterable de RandomNumber
+ */
+export class RandomNumberSetCollection implements Iterable<RandomNumber> {
+
+  private numeros: Set<RandomNumber>;
+
+  /**
+   * Constructor
+   * @param numeros conjunto de numeros aleatorios
+   */
+  constructor(numeros: RandomNumber[]) {
+    this.numeros = new Set(numeros);
+  }
+  
+  /**
+   * Funcion getCantidadDeElementos.
+   * @returns tamaño del conjunto
+   */
+  getCantidadDeElementos() {
+      return this.numeros.size;
+  }
+  
+  /**
+   * Iterador.
+   * Recorre el conjunto
+   * @returns valores del conjunto
+   */
+  [Symbol.iterator](): Iterator<RandomNumber> {
       return this.numeros.values();
   }
 }
