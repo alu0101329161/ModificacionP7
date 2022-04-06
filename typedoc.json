@@ -1,7 +1,9 @@
 {
     "entryPoints": [
         "./src/modificacion.ts",
-        "./src/Modificacion/modif.ts"
+        "./src/Modificacion/modif.ts",
+        "./src/Modificacion/revista.ts",
+        "./src/Modificacion/persona.ts"
     ],
     "out": "./typedoc"
 }
